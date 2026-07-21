@@ -1,0 +1,26 @@
+// Welcome t simple typescript stater session
+
+// first you need to install node js in your system
+// https://nodejs.org/en/download
+
+// then set is properly
+// and run this command
+// npm install -g typescript
+// that install typescript compiler in your system and then you can globally access that with
+// tsc
+
+// eg :- tsc index.ts -> that will create index.js file then you can run that index.js file with
+// node index.js
+// and you get your output
+
+// to make this more simple i make one .sh file that run in Linux and Mac and also create .bat file that run in Windows
+
+// that file name is compile.bat and compile.sh file
+// you just mansion the file name in front of that file in terminal that's it it will compile and run the file
+
+// eg:- ./compile.sh Practice
+// eg:- ./compile.bat Practice
+
+// do not mansion any file type in front of filename i already mansion in that .sh and .bat file
+// in that .sh and .bat file i mansion ignorConfig that will ignore config file content completely
+// that is created in folder tsconfig.json
