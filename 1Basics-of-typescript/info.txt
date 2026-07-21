@@ -9,7 +9,7 @@
 // that install typescript compiler in your system and then you can globally access that with
 // tsc
 
-// eg :- tsc index.ts -> that will create index.js file then you can run that index.js file with
+// eg:- tsc index.ts -> that will create index.js file then you can run that index.js file with
 // node index.js
 // and you get your output
 
