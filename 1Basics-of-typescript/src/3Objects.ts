@@ -161,7 +161,7 @@ console.log(noEmail); // { id: 1, name: 'Manish' }
 console.log(roles); // { admin: true, editor: false, viewer: true }
 
 // ── 11. Type Narrowing ───────────────────────────────────────
-// TypeScript narrows the type inside a condition block based on runtime checks.
+// TypeScript narrow the type inside a condition block based on runtime checks.
 // This lets you safely call type-specific methods without casting.
 function printId(id: number | string): void {
   if (typeof id === "string") {
@@ -181,7 +181,7 @@ class BankAccount {
 
   constructor(
     public readonly owner: string, // public + readonly set in one line
-    initialBalance: number
+    initialBalance: number,
   ) {
     this.balance = initialBalance;
   }
