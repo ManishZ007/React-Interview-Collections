@@ -14,7 +14,11 @@ A structured, annotated collection for learning TypeScript and React from scratc
     │   ├── 2Functions.ts       ← everything about typed functions
     │   ├── 3Objects.ts         ← interfaces, type aliases, utility types
     │   ├── 4Array.ts           ← all array methods with typed examples
-    │   └── 5Union.ts           ← union types, narrowing, discriminated unions
+    │   ├── 5Union.ts           ← union types, narrowing, discriminated unions
+    │   ├── 6Tuple.ts           ← fixed-length typed arrays, destructuring, patterns
+    │   ├── 7Enums.ts           ← numeric, string, const enums + real use cases
+    │   ├── 8Interface.ts       ← deep dive: generics, implements, merging, index sigs
+    │   └── 9Type.ts            ← type aliases: mapped, conditional, template literal
     ├── dist/                   ← compiled JS output (auto-generated, don't edit)
     ├── compile.sh              ← run a file on Linux / macOS
     ├── compile.bat             ← run a file on Windows
@@ -196,6 +200,79 @@ Read top to bottom. The last three sections (chaining, destructuring) are the mo
 
 ---
 
+### `6Tuple.ts` — Tuples in TypeScript
+
+| Section | Topic | Key idea |
+|---|---|---|
+| 1 | Basic tuple `[T1, T2]` | Fixed-length array — each position has its own type |
+| 2 | Named tuples | Label each position for readability — `[x: number, y: number]` |
+| 3 | Tuple destructuring | Unpack into variables — this is exactly how `useState` works |
+| 4 | Function returning a tuple | Return multiple values cleanly without wrapping in an object |
+| 5 | useState-style pattern | `[getter, setter]` tuple — build the hook pattern yourself |
+| 6 | Optional elements `?` | Last elements can be omitted |
+| 7 | Rest elements `...` | Variable-length tail in a typed tuple |
+| 8 | Readonly tuple | Elements cannot be changed after creation |
+| 9 | Spread tuple into function | Use a tuple as arguments directly |
+| 10 | Array of tuples | Store structured records; `Object.entries` pattern |
+
+---
+
+### `7Enums.ts` — Enums in TypeScript
+
+| Section | Topic | Key idea |
+|---|---|---|
+| 1 | Numeric enum | Members get auto-incremented numbers (0, 1, 2, ...) |
+| 2 | Reverse mapping | Look up name from value — `Direction[0]` → `"Up"` |
+| 3 | String enum | Members have explicit string values — safer in logs and APIs |
+| 4 | Enum in a function | TypeScript rejects any value outside the enum |
+| 5 | Enum in a switch | Exhaustive check with `never` to catch missing cases |
+| 6 | Enum as object key | `Record<Role, string[]>` — permission lookup tables |
+| 7 | Const enum | Inlined at compile time — zero runtime cost |
+| 8 | Computed / bitwise members | `1 << 0`, `1 << 1` — file permission flags pattern |
+| 9 | Iterating over an enum | `Object.values`, filter reverse entries for numeric enums |
+| 10 | `keyof typeof` | Get the enum member names as a string literal union |
+| 11 | Enum vs literal union | Decision guide — when to use each |
+
+---
+
+### `8Interface.ts` — Interfaces (Deep Dive)
+
+| Section | Topic | Key idea |
+|---|---|---|
+| 1 | Basic interface | Shape of an object |
+| 2 | Method signatures | Two ways to describe methods in an interface |
+| 3 | Optional & readonly | `?` and `readonly` modifiers |
+| 4 | Extending one interface | Inherit all parent properties and add new ones |
+| 5 | Extending multiple interfaces | `extends A, B` — a class can fly AND swim |
+| 6 | `implements` in a class | A class must provide all interface members or TypeScript errors |
+| 7 | Interface for function types | Describe a callable, not just an object |
+| 8 | Index signatures | Dynamic keys — headers, error maps, dictionaries |
+| 9 | Generic interfaces | `ApiResponse<T>`, `PaginatedResponse<T>` — reusable wrappers |
+| 10 | Declaration merging | Declare the same name twice — TypeScript merges them |
+| 11 | Nested interfaces | An interface property is itself another interface |
+| 12 | Interface vs type — full table | Side-by-side comparison of every feature |
+
+---
+
+### `9Type.ts` — Type Aliases (Deep Dive)
+
+| Section | Topic | Key idea |
+|---|---|---|
+| 1 | Primitive aliases | Give domain meaning to `string`, `number`, `boolean` |
+| 2 | Object shape | Same as interface for simple objects |
+| 3 | Union types | Only `type` can express `A \| B` |
+| 4 | Intersection types | `A & B` — object must satisfy both types |
+| 5 | Function types | Reusable function signatures: `Predicate<T>`, `Transform<T,R>` |
+| 6 | Generic type aliases | `Maybe<T>`, `Pair<T,U>`, `ApiResponse<T>` |
+| 7 | Mapped types | `{ [K in keyof T]: ... }` — how `Partial`, `Readonly` are built |
+| 8 | Conditional types | `T extends U ? A : B` — type-level if/else |
+| 9 | Template literal types | `"margin-left"`, `"onClick"` — string types built from unions |
+| 10 | Recursive types | `TreeNode`, `JSONValue` — types that refer to themselves |
+| 11 | `ReturnType` & `Parameters` | Extract types from existing functions |
+| 12 | All utility types — reference | Full table of every built-in utility type |
+
+---
+
 ## How to Study Effectively
 
 1. **Read first** — go through the file top to bottom, reading every comment.
@@ -214,6 +291,10 @@ Read top to bottom. The last three sections (chaining, destructuring) are the mo
 - [x] Objects (interface, type alias, optional/readonly, extend, intersection, utility types)
 - [x] Arrays (map, filter, reduce, forEach, find, sort, flat, chaining, destructuring)
 - [x] Union Types & Type Guards (literal unions, narrowing, discriminated unions, never, Extract/Exclude)
+- [x] Tuples (named, optional, rest, readonly, useState pattern, spread into functions)
+- [x] Enums (numeric, string, const, bitwise, keyof typeof, enum vs union)
+- [x] Interfaces (methods, extends, implements, generics, declaration merging, index sigs)
+- [x] Type Aliases (mapped types, conditional types, template literal types, recursive, utility types)
 - [ ] Generics in depth (generic interfaces, generic classes, constraints)
 - [ ] Modules & Namespaces
 
