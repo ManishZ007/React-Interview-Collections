@@ -73,7 +73,11 @@ console.log(subtract(10, 5)); // 5
 // ── 9. Functions as Parameters (Callbacks) ───────────────────
 // Pass a function as an argument — this is how .map(), .filter() and
 // event listeners work under the hood.
-function applyOperation(a: number, b: number, operation: MathOperation): number {
+function applyOperation(
+  a: number,
+  b: number,
+  operation: MathOperation,
+): number {
   return operation(a, b);
 }
 console.log(applyOperation(10, 3, add)); // 13

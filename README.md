@@ -12,7 +12,9 @@ A structured, annotated collection for learning TypeScript and React from scratc
     ├── src/                    ← source files you read and edit
     │   ├── 1DataTypes.ts       ← all TypeScript types with examples
     │   ├── 2Functions.ts       ← everything about typed functions
-    │   └── 3Objects.ts         ← interfaces, type aliases, utility types
+    │   ├── 3Objects.ts         ← interfaces, type aliases, utility types
+    │   ├── 4Array.ts           ← all array methods with typed examples
+    │   └── 5Union.ts           ← union types, narrowing, discriminated unions
     ├── dist/                   ← compiled JS output (auto-generated, don't edit)
     ├── compile.sh              ← run a file on Linux / macOS
     ├── compile.bat             ← run a file on Windows
@@ -123,6 +125,54 @@ Read this file from top to bottom. Each section builds on the one before it.
 
 ---
 
+### `5Union.ts` — Union Types in TypeScript
+
+| Section | Topic | Key idea |
+|---|---|---|
+| 1 | Basic union `\|` | A value can be one of several types |
+| 2 | Literal union types | Restrict to exact strings or numbers (`"up" \| "down"`) |
+| 3 | Narrowing with `typeof` | TypeScript knows the exact type inside each branch |
+| 4 | Narrowing with `instanceof` | Narrow between class instances |
+| 5 | Narrowing with `in` | Check if a property exists to tell interfaces apart |
+| 6 | Discriminated unions | Shared `kind` field lets TypeScript narrow automatically in a `switch` |
+| 7 | Union with `null` / `undefined` | Handle missing values safely with `?.` and `??` |
+| 8 | Type predicates | Write custom guard functions: `value is string` |
+| 9 | Union in arrays | `(string \| number)[]` — process each element by its type |
+| 10 | Union in interfaces | Properties that accept multiple types — common in API responses |
+| 11 | Exhaustive check with `never` | Catch unhandled union members at compile time |
+| 12 | `Extract` & `Exclude` | Built-in helpers that filter union members; `NonNullable<T>` |
+
+**The most important section is #6 (Discriminated Unions)** — this pattern appears in Redux reducers, API responses, React state machines, and almost every large TypeScript codebase.
+
+---
+
+### `4Array.ts` — Arrays in TypeScript
+
+Read top to bottom. The last three sections (chaining, destructuring) are the most important for React.
+
+| Section | Topic | Key idea |
+|---|---|---|
+| 1 | Declaring arrays | `number[]` vs `Array<number>` vs `ReadonlyArray<number>` |
+| 2 | push / pop / shift / unshift | Add and remove elements at both ends |
+| 3 | `map()` | Transform every element → new array. Core React list pattern |
+| 4 | `filter()` | Keep elements matching a condition → new array |
+| 5 | `reduce()` | Collapse the array into a single value (sum, object, count) |
+| 6 | `forEach()` | Iterate for side effects — returns nothing |
+| 7 | `find()` & `findIndex()` | Get first matching element or its index |
+| 8 | `some()` & `every()` | Check if any / all elements satisfy a condition |
+| 9 | `includes()` & `indexOf()` | Existence check and position lookup |
+| 10 | `slice()` | Extract a portion without mutating the original |
+| 11 | `splice()` | Insert, remove, or replace elements in place |
+| 12 | `sort()` | Sort strings or numbers — always use a comparator for numbers |
+| 13 | `concat()` & spread `...` | Merge arrays without mutation |
+| 14 | `flat()` & `flatMap()` | Flatten nested arrays; map + flatten in one step |
+| 15 | `Array.from()` | Create arrays from iterables, strings, or ranges |
+| 16 | `fill()` | Fill a range with a fixed value |
+| 17 | Method chaining | `filter → map → reduce` in one pipeline |
+| 18 | Destructuring | Unpack elements into variables — used with React hooks |
+
+---
+
 ### `3Objects.ts` — Objects, Interfaces & Utility Types
 
 | Section | Topic | Key idea |
@@ -162,7 +212,8 @@ Read this file from top to bottom. Each section builds on the one before it.
 - [x] Data Types (`string`, `number`, `boolean`, `array`, `tuple`, `enum`, `any`, `unknown`)
 - [x] Functions (typed, optional, default, rest, generics, overloading, async)
 - [x] Objects (interface, type alias, optional/readonly, extend, intersection, utility types)
-- [ ] Union Types & Type Guards
+- [x] Arrays (map, filter, reduce, forEach, find, sort, flat, chaining, destructuring)
+- [x] Union Types & Type Guards (literal unions, narrowing, discriminated unions, never, Extract/Exclude)
 - [ ] Generics in depth (generic interfaces, generic classes, constraints)
 - [ ] Modules & Namespaces
 
