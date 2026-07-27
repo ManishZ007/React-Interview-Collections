@@ -44,6 +44,13 @@ Each file is a standalone lesson: **read the code top to bottom → run it → r
 │       │   │   ├── Memo.tsx        ← React.memo — skip child re-renders
 │       │   │   ├── UseMemo.tsx     ← useMemo — cache expensive values
 │       │   │   └── UseCallBack.tsx ← useCallback — cache function refs
+│       │   ├── hooks3/             ← Level 3: advanced & special-purpose hooks
+│       │   │   ├── UseLayoutEffect.tsx      ← read DOM before browser paints
+│       │   │   ├── UseImperativeHandle.tsx  ← expose child methods to parent
+│       │   │   ├── UseTransition.tsx        ← mark update as non-urgent
+│       │   │   ├── UseDeferredValue.tsx     ← defer a received value
+│       │   │   ├── UseId.tsx               ← generate unique stable IDs
+│       │   │   └── UseSyncExternalStore.tsx ← subscribe to external stores
 │       │   ├── main.tsx            ← entry point
 │       │   ├── App.tsx             ← root component
 │       │   └── index.css
@@ -331,6 +338,23 @@ All React lessons live inside `2Basic-of-ReactTypscript/1myapp/src/`. Open the p
 
 **Do not add them by default.** Only use when you have a real render performance problem. Open the browser console and watch for unnecessary re-renders first.
 
+### Level 3 — Advanced & Special-Purpose Hooks (`hooks3/`)
+
+| Hook                    | File                       | Use when                                                         |
+| ----------------------- | -------------------------- | ---------------------------------------------------------------- |
+| `useLayoutEffect`       | `UseLayoutEffect.tsx`      | read DOM size/position before browser paints (prevents flicker)  |
+| `useImperativeHandle`   | `UseImperativeHandle.tsx`  | parent needs to call a method on a child (focus, reset, scroll)  |
+| `useTransition`         | `UseTransition.tsx`        | you OWN a slow state update — keep UI responsive while it runs   |
+| `useDeferredValue`      | `UseDeferredValue.tsx`     | you RECEIVE a value that drives slow rendering — defer it         |
+| `useId`                 | `UseId.tsx`                | link `<label>` to `<input>` with a stable unique id              |
+| `useSyncExternalStore`  | `UseSyncExternalStore.tsx` | subscribe to browser APIs or third-party stores (Redux, Zustand) |
+
+**Key distinction for Level 3:**
+- `useLayoutEffect` vs `useEffect` → same API, different timing (before vs after paint)
+- `useTransition` vs `useDeferredValue` → transition wraps a setState you OWN; deferredValue wraps a value you RECEIVE
+- `useImperativeHandle` always pairs with `forwardRef`
+- `useSyncExternalStore` replaces the old `useState + useEffect` listener pattern
+
 ### Context Pattern — Reading Order
 
 The 5 files inside `Context/` form one complete pattern. Read them in this order:
@@ -358,6 +382,15 @@ ShowTheme.tsx      → consumer that READS (displays theme)
 - [x] `React.memo` — skip child re-render when props unchanged
 - [x] `useMemo` — cache expensive computed value
 - [x] `useCallback` — cache function reference for memo children
+
+**Level 3 — Advanced & Special-Purpose**
+
+- [x] `useLayoutEffect` — read DOM before browser paints (no flicker)
+- [x] `useImperativeHandle` — expose child methods to parent via ref
+- [x] `useTransition` — mark a state update as low priority, keep UI responsive
+- [x] `useDeferredValue` — defer a received value during heavy rendering
+- [x] `useId` — generate unique stable IDs for form field pairs
+- [x] `useSyncExternalStore` — subscribe to external stores and browser APIs
 
 **Next**
 
