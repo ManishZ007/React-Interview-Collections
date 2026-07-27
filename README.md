@@ -44,6 +44,11 @@ Each file is a standalone lesson: **read the code top to bottom → run it → r
 │       │   │   ├── Memo.tsx        ← React.memo — skip child re-renders
 │       │   │   ├── UseMemo.tsx     ← useMemo — cache expensive values
 │       │   │   └── UseCallBack.tsx ← useCallback — cache function refs
+│       │   ├── hooks4Custom/       ← Level 4: custom hooks (reusable logic)
+│       │   │   ├── UseFetch.tsx        ← useFetch<T> — generic API fetch with loading/error
+│       │   │   ├── useLocalStorage.tsx ← useLocalStorage<T> — persist state across reloads
+│       │   │   ├── useDebounce.tsx     ← useDebounce<T> — delay value updates (search inputs)
+│       │   │   └── useToggle.tsx       ← useToggle — flip any boolean cleanly
 │       │   ├── hooks3/             ← Level 3: advanced & special-purpose hooks
 │       │   │   ├── UseLayoutEffect.tsx      ← read DOM before browser paints
 │       │   │   ├── UseImperativeHandle.tsx  ← expose child methods to parent
@@ -338,6 +343,27 @@ All React lessons live inside `2Basic-of-ReactTypscript/1myapp/src/`. Open the p
 
 **Do not add them by default.** Only use when you have a real render performance problem. Open the browser console and watch for unnecessary re-renders first.
 
+### Level 4 — Custom Hooks (`hooks4Custom/`)
+
+| Hook               | File                  | Use when                                              |
+| ------------------ | --------------------- | ----------------------------------------------------- |
+| `useFetch<T>`      | `UseFetch.tsx`        | any component needs to load data from an API          |
+| `useLocalStorage<T>` | `useLocalStorage.tsx` | state should survive a page refresh                 |
+| `useDebounce<T>`   | `useDebounce.tsx`     | input drives API calls — wait until user stops typing |
+| `useToggle`        | `useToggle.tsx`       | any boolean that needs to flip (modal, theme, show)   |
+
+**The rule for custom hooks:**
+- A function that starts with `use` and calls other hooks inside is a custom hook.
+- Custom hooks share **logic**, not **state** — each component gets its own copy.
+- The API you return is your design decision: `[value, setter]` tuple, or `{ data, loading, error }` object.
+
+**Pattern every custom hook follows:**
+```
+1. Accept config as parameters (url, key, delay, initialValue)
+2. Declare internal state with useState / useEffect
+3. Return the parts the caller needs
+```
+
 ### Level 3 — Advanced & Special-Purpose Hooks (`hooks3/`)
 
 | Hook                    | File                       | Use when                                                         |
@@ -391,6 +417,13 @@ ShowTheme.tsx      → consumer that READS (displays theme)
 - [x] `useDeferredValue` — defer a received value during heavy rendering
 - [x] `useId` — generate unique stable IDs for form field pairs
 - [x] `useSyncExternalStore` — subscribe to external stores and browser APIs
+
+**Level 4 — Custom Hooks**
+
+- [x] `useFetch<T>` — generic API fetch with loading / error / data states
+- [x] `useLocalStorage<T>` — useState that persists to localStorage
+- [x] `useDebounce<T>` — delay value updates until user stops typing
+- [x] `useToggle` — flip any boolean with a stable toggle function
 
 **Next**
 

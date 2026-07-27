@@ -13,7 +13,7 @@
 //   useEffect(() => { ... }, [id]) → runs when `id` changes
 //
 // CLEANUP — return a function to cancel the effect when the
-//   component unmounts or before the next run.
+//   component unmount or before the next run.
 //   This file uses an isCancelled flag to prevent setting state
 //   on an already-unmounted component — a very common real pattern.
 // ============================================================
