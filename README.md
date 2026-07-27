@@ -29,10 +29,20 @@ Each file is a standalone lesson: **read the code top to bottom → run it → r
 ├── 2Basic-of-ReactTypscript/       ← Phase 2: React with TypeScript
 │   └── 1myapp/                     ← Vite + React + TypeScript starter app
 │       ├── src/
-│       │   ├── main.tsx            ← entry point — renders <App /> into the DOM
-│       │   ├── App.tsx             ← root component (add your lessons here)
-│       │   ├── App.css             ← component styles
-│       │   └── index.css           ← global styles
+│       │   ├── hooks/
+│       │   │   ├── UseState.tsx    ← useState — local UI state
+│       │   │   ├── UseEffect.tsx   ← useEffect — API fetch with cleanup
+│       │   │   ├── UseReducer.tsx  ← useReducer — complex state + form
+│       │   │   ├── UserRef.tsx     ← useRef — DOM focus example
+│       │   │   └── Context/
+│       │   │       ├── ThemeContext.tsx   ← context shape + createContext
+│       │   │       ├── ThemeProvider.tsx  ← holds state, wraps children
+│       │   │       ├── useTheme.tsx       ← custom hook to consume context
+│       │   │       ├── ThemeButton.tsx    ← consumer: writes (toggleTheme)
+│       │   │       └── ShowTheme.tsx      ← consumer: reads (theme value)
+│       │   ├── main.tsx            ← entry point
+│       │   ├── App.tsx             ← root component
+│       │   └── index.css
 │       ├── public/
 │       ├── vite.config.ts
 │       └── tsconfig.json
@@ -290,19 +300,40 @@ Each section builds on the one before it.
 
 All React lessons live inside `2Basic-of-ReactTypscript/1myapp/src/`. Open the project, run `npm run dev`, and edit `App.tsx` to see your changes live in the browser.
 
+### Hooks — What, When, How
+
+| Hook | File | Use when |
+|---|---|---|
+| `useState` | `hooks/UseState.tsx` | UI needs to react to a changing value |
+| `useEffect` | `hooks/UseEffect.tsx` | fetch data, subscribe, sync with external system |
+| `useReducer` | `hooks/UseReducer.tsx` | multiple related fields or complex state transitions |
+| `useRef` | `hooks/UserRef.tsx` | access a DOM element or store a value without re-render |
+| `useContext` | `hooks/Context/` | share data across many components without prop drilling |
+
+### Context Pattern — Reading Order
+
+The 5 files inside `Context/` form one complete pattern. Read them in this order:
+
+```
+ThemeContext.tsx   → defines the shape (what data exists)
+ThemeProvider.tsx  → owns the state, wraps the tree
+useTheme.tsx       → custom hook, the only import consumers need
+ThemeButton.tsx    → consumer that WRITES (calls toggleTheme)
+ShowTheme.tsx      → consumer that READS (displays theme)
+```
+
 ### Roadmap
 
-- [ ] JSX & functional components
-- [ ] Typing props with `interface`
-- [ ] `useState<T>` with typed state
-- [ ] `useEffect` — side effects and cleanup
-- [ ] `useRef<T>` — DOM refs and mutable values
-- [ ] Event handling with proper types (`React.MouseEvent`, `React.ChangeEvent`)
+- [x] `useState` — primitive, union, array, object, functional update
+- [x] `useEffect` — API fetch, cleanup / cancellation flag
+- [x] `useReducer` — typed State + Action, dual reducer example
+- [x] `useRef` — DOM ref, focus example
+- [x] `useContext` + custom hook — full theme context pattern
+- [ ] Props typing with `interface`
+- [ ] Event handling (`React.MouseEvent`, `React.ChangeEvent`)
 - [ ] Conditional rendering
 - [ ] Rendering lists with `.map()` and `key`
-- [ ] `useContext` + Context API
 - [ ] Custom hooks
-- [ ] API calls with `fetch` / `axios` and typed responses
 - [ ] React Router
 - [ ] Form handling
 

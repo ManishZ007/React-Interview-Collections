@@ -1,3 +1,25 @@
+// ============================================================
+// HOOK: useReducer
+// ============================================================
+// WHAT  — manages state through a reducer function instead of
+//          direct setters. You dispatch an action, the reducer
+//          decides the next state.
+// WHEN  — use useReducer instead of useState when:
+//          • state has multiple related fields (counter + form)
+//          • next state depends on complex logic or the old state
+//          • you want all state transitions in one predictable place
+// PATTERN
+//   1. define State type  — shape of what you store
+//   2. define Action type — discriminated union of all allowed actions
+//   3. write reducer(state, action) → newState
+//   4. useReducer(reducer, initialState) → [state, dispatch]
+//   5. call dispatch({ type: "..." }) to trigger a state change
+//
+// THIS FILE has two independent reducers:
+//   • reducer      — manages a dual counter (A and B)
+//   • changeReducer — manages a form (name + email)
+// ============================================================
+
 import { useReducer, type ChangeEvent } from "react";
 
 // this is the shape of our counter state

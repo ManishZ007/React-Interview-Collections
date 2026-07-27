@@ -1,9 +1,7 @@
-import UseEffect from "../hooks/UseEffect";
-
 function App() {
   return (
     <>
-      <UseEffect />
+      <h1>Hello Manish</h1>
     </>
   );
 }

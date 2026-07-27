@@ -1,26 +1,81 @@
-// Welcome t simple typescript stater session
+// ============================================================
+// SETUP GUIDE — React & TypeScript Interview Collections
+// ============================================================
 
-// first you need to install node js in your system
-// https://nodejs.org/en/download
+// ── PHASE 1: TypeScript (1Basics-of-typescript/) ────────────
 
-// then set is properly
-// and run this command
+// STEP 1 — Install Node.js
+// https://nodejs.org/en/download  (choose LTS version)
+
+// STEP 2 — Install TypeScript compiler globally (one time only)
 // npm install -g typescript
-// that install typescript compiler in your system and then you can globally access that with
-// tsc
+// tsc --version   ← verify it works
 
-// eg:- tsc index.ts -> that will create index.js file then you can run that index.js file with
-// node index.js
-// and you get your output
+// STEP 3 — Run any .ts file
+// Open terminal inside 1Basics-of-typescript/
 
-// to make this more simple i make one .sh file that run in Linux and Mac and also create .bat file that run in Windows
+// Windows:
+// compile.bat 1DataTypes
+// compile.bat 2Functions
 
-// that file name is compile.bat and compile.sh file
-// you just mansion the file name in front of that file in terminal that's it it will compile and run the file
+// Linux / macOS:
+// chmod +x compile.sh   ← give permission once
+// ./compile.sh 1DataTypes
+// ./compile.sh 2Functions
 
-// eg:- ./compile.sh Practice
-// eg:- ./compile.bat Practice
+// RULE — pass only the filename, NO .ts extension, NO path prefix.
+// The script compiles src/<name>.ts → dist/<name>.js then runs it.
+// If compilation fails it stops — it never runs broken code.
 
-// do not mansion any file type in front of filename i already mansion in that .sh and .bat file
-// in that .sh and .bat file i mansion ignorConfig that will ignore config file content completely
-// that is created in folder tsconfig.json
+// Manual (without the script):
+// tsc src/2Functions.ts --ignoreConfig --outDir dist
+// node dist/2Functions.js
+
+// ── PHASE 2: React (2Basic-of-ReactTypscript/1myapp/) ───────
+
+// STEP 1 — Install dependencies (one time only)
+// cd 2Basic-of-ReactTypscript/1myapp
+// npm install
+
+// STEP 2 — Start the dev server
+// npm run dev
+// Open http://localhost:5173 in your browser.
+// The app hot-reloads — save a file and the browser updates instantly.
+
+// STEP 3 — Where to write lessons
+// All hook files are inside: src/hooks/
+// Context pattern files are inside: src/hooks/Context/
+// To test a component, import it into App.tsx and render it.
+
+// Example App.tsx:
+// import UseState from "./hooks/UseState"
+// function App() { return <UseState /> }
+
+// ── QUICK REFERENCE — Hook decision guide ───────────────────
+
+// useState   → simple value that changes and needs to show in UI
+// useEffect  → side effects: fetch, timer, event listener, localStorage
+// useReducer → complex state with many fields or many transition types
+// useRef     → access DOM element OR store value without causing re-render
+// useContext → share data across many components (theme, user, language)
+
+// ── COMMON ERRORS ───────────────────────────────────────────
+
+// "Cannot find module" after adding a new file?
+// → Make sure the file extension is .tsx (not .ts) for JSX files.
+
+// TypeScript error on event handler?
+// → Type it: (e: React.ChangeEvent<HTMLInputElement>) => void
+
+// useContext returns undefined?
+// → You forgot to wrap the component with the Provider in App.tsx or main.tsx
+
+// Hot reload not working?
+// → Check the terminal for compile errors. Fix them and the server restarts.
+
+// ── FILE NAMING CONVENTION ───────────────────────────────────
+
+// .tsx  → any file that contains JSX (components, context files)
+// .ts   → plain TypeScript with no JSX (utilities, types, hooks that return no JSX)
+// Components and hooks start with a capital letter: UseState, ThemeProvider
+// Custom hooks start with "use": useTheme, useAuth, useFetch

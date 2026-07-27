@@ -1,3 +1,17 @@
+// ============================================================
+// HOOK: useState
+// ============================================================
+// WHAT  — stores a value that, when changed, re-renders the component.
+// WHEN  — any time the UI needs to react to changing data:
+//          counters, form inputs, toggle flags, API results.
+// RULE  — one useState per independent piece of data.
+//          if two values always change together, combine them into
+//          one object state or switch to useReducer.
+// SYNTAX
+//   const [value, setValue] = useState(initialValue)
+//   const [value, setValue] = useState<Type>(initialValue)  // explicit type
+// ============================================================
+
 import { useState } from "react";
 
 function UseState() {
