@@ -1,7 +1,10 @@
+import Memo from "./hooks2/Memo";
+
 function App() {
   return (
     <>
-      <h1>Hello Manish</h1>
+      <h1>Hello</h1>
+      <Memo />
     </>
   );
 }
