@@ -1,6 +1,8 @@
 # React & TypeScript Interview Collections
 
-A structured, annotated collection for learning TypeScript and React from scratch — built for interview preparation and self-study. Each file is a standalone lesson: read the code top to bottom, run it, then try re-implementing it from memory.
+A structured, annotated collection for learning TypeScript and React with TypeScript — built for interview preparation and self-study.
+
+Each file is a standalone lesson: **read the code top to bottom → run it → re-implement from memory.**
 
 ---
 
@@ -8,73 +10,74 @@ A structured, annotated collection for learning TypeScript and React from scratc
 
 ```
 .
-└── 1Basics-of-typescript/
-    ├── src/                    ← source files you read and edit
-    │   ├── 1DataTypes.ts       ← all TypeScript types with examples
-    │   ├── 2Functions.ts       ← everything about typed functions
-    │   ├── 3Objects.ts         ← interfaces, type aliases, utility types
-    │   ├── 4Array.ts           ← all array methods with typed examples
-    │   ├── 5Union.ts           ← union types, narrowing, discriminated unions
-    │   ├── 6Tuple.ts           ← fixed-length typed arrays, destructuring, patterns
-    │   ├── 7Enums.ts           ← numeric, string, const enums + real use cases
-    │   ├── 8Interface.ts       ← deep dive: generics, implements, merging, index sigs
-    │   └── 9Type.ts            ← type aliases: mapped, conditional, template literal
-    ├── dist/                   ← compiled JS output (auto-generated, don't edit)
-    ├── compile.sh              ← run a file on Linux / macOS
-    ├── compile.bat             ← run a file on Windows
-    ├── tsconfig.json           ← TypeScript compiler config
-    └── info.txt                ← setup instructions
+├── 1Basics-of-typescript/          ← Phase 1: TypeScript fundamentals
+│   ├── src/
+│   │   ├── 1DataTypes.ts           ← string, number, boolean, array, tuple, enum, any
+│   │   ├── 2Functions.ts           ← typed functions, generics, async, overloading
+│   │   ├── 3Objects.ts             ← objects, interfaces, utility types, classes
+│   │   ├── 4Array.ts               ← all array methods with typed examples
+│   │   ├── 5Union.ts               ← union types, narrowing, discriminated unions
+│   │   ├── 6Tuple.ts               ← fixed-length typed arrays, useState pattern
+│   │   ├── 7Enums.ts               ← numeric, string, const enums + real use cases
+│   │   ├── 8Interface.ts           ← deep dive: generics, implements, merging
+│   │   └── 9Type.ts                ← mapped, conditional, template literal types
+│   ├── dist/                       ← compiled JS (auto-generated, do not edit)
+│   ├── compile.sh                  ← compile + run on Linux / macOS
+│   ├── compile.bat                 ← compile + run on Windows
+│   └── tsconfig.json
+│
+├── 2Basic-of-ReactTypscript/       ← Phase 2: React with TypeScript
+│   └── 1myapp/                     ← Vite + React + TypeScript starter app
+│       ├── src/
+│       │   ├── main.tsx            ← entry point — renders <App /> into the DOM
+│       │   ├── App.tsx             ← root component (add your lessons here)
+│       │   ├── App.css             ← component styles
+│       │   └── index.css           ← global styles
+│       ├── public/
+│       ├── vite.config.ts
+│       └── tsconfig.json
+│
+├── info.txt                        ← TypeScript setup notes
+└── README.md                       ← this file
 ```
 
 ---
 
-## How to Run Any File
+## How to Run — Phase 1 (TypeScript files)
 
-### Step 1 — Install dependencies (one time only)
+### Setup (one time only)
 
-Make sure Node.js is installed: https://nodejs.org/en/download
-
-Then install the TypeScript compiler globally:
+Install Node.js: https://nodejs.org/en/download
 
 ```bash
 npm install -g typescript
-```
-
-Verify it works:
-
-```bash
 tsc --version
 ```
 
----
-
-### Step 2 — Run a file
+### Run any `.ts` file
 
 Pass the filename **without** the `.ts` extension.
 
-**On Linux / macOS:**
-
+**Linux / macOS:**
 ```bash
-chmod +x compile.sh   # give permission once
+cd 1Basics-of-typescript
+chmod +x compile.sh        # give permission once
 ./compile.sh 1DataTypes
 ./compile.sh 2Functions
-./compile.sh 3Objects
+./compile.sh 9Type
 ```
 
-**On Windows (Command Prompt or Git Bash):**
-
+**Windows:**
 ```bat
+cd 1Basics-of-typescript
 compile.bat 1DataTypes
 compile.bat 2Functions
-compile.bat 3Objects
+compile.bat 9Type
 ```
 
-The script compiles `src/<name>.ts` → `dist/<name>.js` and immediately runs it with Node.js. If compilation fails it prints the error and stops — it never runs broken code.
+The script compiles `src/<name>.ts` → `dist/<name>.js` and immediately runs it. If the compile fails it stops — it never runs broken code.
 
----
-
-### Manual compile (without the script)
-
+**Manual (without the script):**
 ```bash
 tsc src/2Functions.ts --ignoreConfig --outDir dist
 node dist/2Functions.js
@@ -82,237 +85,243 @@ node dist/2Functions.js
 
 ---
 
-## Topics Covered
+## How to Run — Phase 2 (React app)
 
-### `1DataTypes.ts` — TypeScript Type System
+```bash
+cd 2Basic-of-ReactTypscript/1myapp
+npm install
+npm run dev
+```
 
-| Topic | What you learn |
+Then open `http://localhost:5173` in your browser. The app hot-reloads — any change you save appears instantly.
+
+---
+
+## Phase 1 — TypeScript Topics
+
+> Study order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
+
+---
+
+### `1DataTypes.ts` — The TypeScript Type System
+
+| Type | What you learn |
 |---|---|
-| `string` | Common string methods: `toUpperCase`, `slice`, `split`, `replace`, `includes`, `trim` |
-| `number` | Math methods: `toFixed`, `Math.abs/round/floor/ceil/max/min/pow/sqrt` |
-| `boolean` | Logical operators: `!`, `&&`, `\|\|`, `Boolean()`, strict equality |
-| `array` | Array methods: `push`, `pop`, `map`, `filter`, `reduce`, `find`, `includes`, `sort`, `join` |
-| `object` | `Object.keys`, `Object.values`, `Object.entries`, spread, `JSON.stringify` |
+| `string` | `toUpperCase`, `slice`, `split`, `replace`, `includes`, `trim`, `concat` |
+| `number` | `toFixed`, `Math.abs/round/floor/ceil/max/min/pow/sqrt` |
+| `boolean` | `!`, `&&`, `\|\|`, `Boolean()`, strict equality `===` |
+| `array` | `push`, `pop`, `map`, `filter`, `reduce`, `find`, `includes`, `sort`, `join` |
+| `object` | `Object.keys/values/entries`, spread `{...obj}`, `JSON.stringify` |
 | `null / undefined` | Nullish coalescing `??`, strict null checks |
-| `tuple` | Fixed-length, fixed-type arrays — e.g. `[number, number]` |
+| `tuple` | Fixed-length, fixed-type arrays: `[number, number]` |
 | `enum` | Named numeric constants, reverse lookup |
-| `any / unknown` | When to use each and why `unknown` is safer than `any` |
+| `any / unknown` | When to use each — `unknown` is safer than `any` |
 
 ---
 
 ### `2Functions.ts` — Functions in TypeScript
 
-Read this file from top to bottom. Each section builds on the one before it.
+Each section builds on the one before it.
 
-| Section | Topic | Key idea |
+| # | Topic | Key idea |
 |---|---|---|
-| 1 | Basic typed function | Parameter types + return type |
-| 2 | String return | Type checking on return value |
-| 3 | Arrow functions | Shorter syntax, common in React |
-| 4 | `void` return | Function that performs an action, returns nothing |
-| 5 | Optional parameters `?` | Parameter may be missing — will be `undefined` |
+| 1 | Basic typed function | Annotate parameter types + return type |
+| 2 | String return | Type checking on the return value |
+| 3 | Arrow functions | Shorter syntax — very common in React |
+| 4 | `void` return type | Function that acts but returns nothing |
+| 5 | Optional parameters `?` | Param may be missing — will be `undefined` |
 | 6 | Default parameters | Fallback value when argument is omitted |
 | 7 | Rest parameters `...` | Accept unlimited arguments as a typed array |
-| 8 | Function type alias | Name a function signature and reuse it as a type |
+| 8 | Function type alias | Name a function signature and reuse it |
 | 9 | Callbacks | Pass a function as an argument |
 | 10 | Higher-order functions | A function that returns another function |
-| 11 | Generic functions `<T>` | One function that works with any type safely |
-| 12 | Function overloading | Same function name, different signatures |
+| 11 | Generic functions `<T>` | One function that works safely with any type |
+| 12 | Function overloading | Same name, different signatures |
 | 13 | `never` return type | Function that throws or never terminates |
-| 14 | Async functions | `async/await` with `Promise<T>` return type |
+| 14 | Async / `Promise<T>` | `async/await` with typed return value |
 
-**Recommended study order:**
-1 → 2 → 3 → 4 → 5 → 6 → 7 (master these first, they appear in every codebase)
-8 → 9 → 10 (understand function types — needed for React props)
-11 → 12 (generics — needed for reusable utilities)
-13 → 14 (never + async — needed for API calls and error handling)
-
----
-
-### `5Union.ts` — Union Types in TypeScript
-
-| Section | Topic | Key idea |
-|---|---|---|
-| 1 | Basic union `\|` | A value can be one of several types |
-| 2 | Literal union types | Restrict to exact strings or numbers (`"up" \| "down"`) |
-| 3 | Narrowing with `typeof` | TypeScript knows the exact type inside each branch |
-| 4 | Narrowing with `instanceof` | Narrow between class instances |
-| 5 | Narrowing with `in` | Check if a property exists to tell interfaces apart |
-| 6 | Discriminated unions | Shared `kind` field lets TypeScript narrow automatically in a `switch` |
-| 7 | Union with `null` / `undefined` | Handle missing values safely with `?.` and `??` |
-| 8 | Type predicates | Write custom guard functions: `value is string` |
-| 9 | Union in arrays | `(string \| number)[]` — process each element by its type |
-| 10 | Union in interfaces | Properties that accept multiple types — common in API responses |
-| 11 | Exhaustive check with `never` | Catch unhandled union members at compile time |
-| 12 | `Extract` & `Exclude` | Built-in helpers that filter union members; `NonNullable<T>` |
-
-**The most important section is #6 (Discriminated Unions)** — this pattern appears in Redux reducers, API responses, React state machines, and almost every large TypeScript codebase.
-
----
-
-### `4Array.ts` — Arrays in TypeScript
-
-Read top to bottom. The last three sections (chaining, destructuring) are the most important for React.
-
-| Section | Topic | Key idea |
-|---|---|---|
-| 1 | Declaring arrays | `number[]` vs `Array<number>` vs `ReadonlyArray<number>` |
-| 2 | push / pop / shift / unshift | Add and remove elements at both ends |
-| 3 | `map()` | Transform every element → new array. Core React list pattern |
-| 4 | `filter()` | Keep elements matching a condition → new array |
-| 5 | `reduce()` | Collapse the array into a single value (sum, object, count) |
-| 6 | `forEach()` | Iterate for side effects — returns nothing |
-| 7 | `find()` & `findIndex()` | Get first matching element or its index |
-| 8 | `some()` & `every()` | Check if any / all elements satisfy a condition |
-| 9 | `includes()` & `indexOf()` | Existence check and position lookup |
-| 10 | `slice()` | Extract a portion without mutating the original |
-| 11 | `splice()` | Insert, remove, or replace elements in place |
-| 12 | `sort()` | Sort strings or numbers — always use a comparator for numbers |
-| 13 | `concat()` & spread `...` | Merge arrays without mutation |
-| 14 | `flat()` & `flatMap()` | Flatten nested arrays; map + flatten in one step |
-| 15 | `Array.from()` | Create arrays from iterables, strings, or ranges |
-| 16 | `fill()` | Fill a range with a fixed value |
-| 17 | Method chaining | `filter → map → reduce` in one pipeline |
-| 18 | Destructuring | Unpack elements into variables — used with React hooks |
+> **Study tip:** Master sections 1–7 first — they appear in every React codebase. Sections 8–10 are needed for typed props. Sections 11–14 are needed for API utilities and advanced hooks.
 
 ---
 
 ### `3Objects.ts` — Objects, Interfaces & Utility Types
 
-| Section | Topic | Key idea |
+| # | Topic | Key idea |
 |---|---|---|
-| 1 | Inline object type | Quick annotation directly on a variable |
-| 2 | Type alias | Name a shape for reuse — also works for unions and primitives |
-| 3 | Interface | The standard way to describe an object's shape |
+| 1 | Inline object type | Quick shape annotation on a variable |
+| 2 | Type alias | Name a shape for reuse |
+| 3 | Interface | Standard way to describe an object's shape |
 | 4 | Optional properties `?` | Field may or may not exist |
-| 5 | Readonly properties | Field cannot be changed after creation |
-| 6 | Extending interfaces | Build on an existing interface — like class inheritance |
-| 7 | Type intersection `&` | Combine two types — object must satisfy both |
-| 8 | Index signatures | Dynamic keys where you don't know all names upfront |
-| 9 | Nested objects | An interface property is itself another interface |
+| 5 | Readonly properties | Field cannot change after creation |
+| 6 | Extending interfaces | Build on an existing interface |
+| 7 | Type intersection `&` | Object must satisfy both types |
+| 8 | Index signatures | Dynamic keys: headers, dictionaries |
+| 9 | Nested objects | Interface property is another interface |
 | 10 | Utility types | `Partial`, `Required`, `Readonly`, `Pick`, `Omit`, `Record` |
-| 11 | Type narrowing | TypeScript refines the type inside `if/typeof` blocks |
-| 12 | Class with types | `public`, `private`, `readonly` access modifiers |
+| 11 | Type narrowing | TypeScript refines type inside `if/typeof` |
+| 12 | Classes with types | `public`, `private`, `readonly` modifiers |
 
-**Key rule to remember:**
-- Use `interface` for object shapes — it can be extended and gives better error messages.
-- Use `type` for everything else: unions (`string | number`), tuples, primitives, or complex combinations.
+> **Rule:** Use `interface` for object shapes. Use `type` for everything else (unions, tuples, primitives, complex combinations).
 
 ---
 
-### `6Tuple.ts` — Tuples in TypeScript
+### `4Array.ts` — Arrays in TypeScript
 
-| Section | Topic | Key idea |
+| # | Topic | Key idea |
+|---|---|---|
+| 1 | Declaring arrays | `number[]` vs `Array<number>` vs `ReadonlyArray<number>` |
+| 2 | push / pop / shift / unshift | Add and remove at both ends |
+| 3 | `map()` | Transform every element → new array. Core React list pattern |
+| 4 | `filter()` | Keep matching elements → new array |
+| 5 | `reduce()` | Collapse array to a single value (sum, object, count) |
+| 6 | `forEach()` | Iterate for side effects — returns nothing |
+| 7 | `find()` & `findIndex()` | First matching element or its index |
+| 8 | `some()` & `every()` | Does any / do all elements satisfy a condition |
+| 9 | `includes()` & `indexOf()` | Existence check and position lookup |
+| 10 | `slice()` | Extract a portion without mutating |
+| 11 | `splice()` | Insert, remove, or replace in place |
+| 12 | `sort()` | Always use a comparator for numbers |
+| 13 | `concat()` & spread `...` | Merge arrays without mutation |
+| 14 | `flat()` & `flatMap()` | Flatten nested arrays |
+| 15 | `Array.from()` | Create arrays from iterables or ranges |
+| 16 | `fill()` | Fill a range with a fixed value |
+| 17 | Method chaining | `filter → map → reduce` in one pipeline |
+| 18 | Destructuring | Unpack into variables — used with React hooks |
+
+---
+
+### `5Union.ts` — Union Types & Type Guards
+
+| # | Topic | Key idea |
+|---|---|---|
+| 1 | Basic union `\|` | Value can be one of several types |
+| 2 | Literal union types | Restrict to exact values: `"up" \| "down"` |
+| 3 | Narrowing with `typeof` | TypeScript knows the exact type in each branch |
+| 4 | Narrowing with `instanceof` | Narrow between class instances |
+| 5 | Narrowing with `in` | Check if a property exists to tell interfaces apart |
+| 6 | **Discriminated unions** | Shared `kind` field → automatic narrowing in `switch` |
+| 7 | Union with `null / undefined` | Safe access with `?.` and fallback with `??` |
+| 8 | Type predicates | Custom guard: `value is string` |
+| 9 | Union in arrays | `(string \| number)[]` — process each by its type |
+| 10 | Union in interfaces | Properties that accept multiple types |
+| 11 | Exhaustive check with `never` | Catch unhandled union members at compile time |
+| 12 | `Extract` & `Exclude` | Filter union members — `NonNullable<T>` shortcut |
+
+> **Section 6 (Discriminated Unions) is the most important** — it appears in Redux, React state machines, and almost every large TypeScript codebase.
+
+---
+
+### `6Tuple.ts` — Tuples
+
+| # | Topic | Key idea |
 |---|---|---|
 | 1 | Basic tuple `[T1, T2]` | Fixed-length array — each position has its own type |
-| 2 | Named tuples | Label each position for readability — `[x: number, y: number]` |
-| 3 | Tuple destructuring | Unpack into variables — this is exactly how `useState` works |
-| 4 | Function returning a tuple | Return multiple values cleanly without wrapping in an object |
-| 5 | useState-style pattern | `[getter, setter]` tuple — build the hook pattern yourself |
+| 2 | Named tuples | Label each position: `[x: number, y: number]` |
+| 3 | Tuple destructuring | Unpack into variables — exactly how `useState` works |
+| 4 | Function returning a tuple | Return multiple values without an object wrapper |
+| 5 | useState-style pattern | Build the `[getter, setter]` hook pattern yourself |
 | 6 | Optional elements `?` | Last elements can be omitted |
 | 7 | Rest elements `...` | Variable-length tail in a typed tuple |
 | 8 | Readonly tuple | Elements cannot be changed after creation |
-| 9 | Spread tuple into function | Use a tuple as arguments directly |
-| 10 | Array of tuples | Store structured records; `Object.entries` pattern |
+| 9 | Spread tuple into function | Pass a tuple directly as function arguments |
+| 10 | Array of tuples | Structured records — `Object.entries` pattern |
 
 ---
 
-### `7Enums.ts` — Enums in TypeScript
+### `7Enums.ts` — Enums
 
-| Section | Topic | Key idea |
+| # | Topic | Key idea |
 |---|---|---|
-| 1 | Numeric enum | Members get auto-incremented numbers (0, 1, 2, ...) |
-| 2 | Reverse mapping | Look up name from value — `Direction[0]` → `"Up"` |
-| 3 | String enum | Members have explicit string values — safer in logs and APIs |
-| 4 | Enum in a function | TypeScript rejects any value outside the enum |
-| 5 | Enum in a switch | Exhaustive check with `never` to catch missing cases |
-| 6 | Enum as object key | `Record<Role, string[]>` — permission lookup tables |
+| 1 | Numeric enum | Auto-incremented values (0, 1, 2, ...) |
+| 2 | Reverse mapping | Name from value: `Direction[0]` → `"Up"` |
+| 3 | String enum | Explicit string values — safer in logs and APIs |
+| 4 | Enum in a function | TypeScript rejects values outside the enum |
+| 5 | Enum in a switch | Exhaustive check with `never` |
+| 6 | Enum as object key | `Record<Role, string[]>` permission tables |
 | 7 | Const enum | Inlined at compile time — zero runtime cost |
-| 8 | Computed / bitwise members | `1 << 0`, `1 << 1` — file permission flags pattern |
-| 9 | Iterating over an enum | `Object.values`, filter reverse entries for numeric enums |
-| 10 | `keyof typeof` | Get the enum member names as a string literal union |
+| 8 | Computed / bitwise members | `1 << 0`, `1 << 1` — file permission flags |
+| 9 | Iterating over an enum | `Object.values`, filtering reverse entries |
+| 10 | `keyof typeof` | Enum member names as a string literal union |
 | 11 | Enum vs literal union | Decision guide — when to use each |
 
 ---
 
 ### `8Interface.ts` — Interfaces (Deep Dive)
 
-| Section | Topic | Key idea |
+| # | Topic | Key idea |
 |---|---|---|
-| 1 | Basic interface | Shape of an object |
-| 2 | Method signatures | Two ways to describe methods in an interface |
+| 1 | Basic interface | Object shape |
+| 2 | Method signatures | Two ways to declare methods in an interface |
 | 3 | Optional & readonly | `?` and `readonly` modifiers |
-| 4 | Extending one interface | Inherit all parent properties and add new ones |
-| 5 | Extending multiple interfaces | `extends A, B` — a class can fly AND swim |
-| 6 | `implements` in a class | A class must provide all interface members or TypeScript errors |
-| 7 | Interface for function types | Describe a callable, not just an object |
-| 8 | Index signatures | Dynamic keys — headers, error maps, dictionaries |
-| 9 | Generic interfaces | `ApiResponse<T>`, `PaginatedResponse<T>` — reusable wrappers |
-| 10 | Declaration merging | Declare the same name twice — TypeScript merges them |
-| 11 | Nested interfaces | An interface property is itself another interface |
-| 12 | Interface vs type — full table | Side-by-side comparison of every feature |
+| 4 | Extending one interface | Inherit + add new properties |
+| 5 | Extending multiple interfaces | `extends A, B` — satisfies both contracts |
+| 6 | `implements` in a class | Class must provide all interface members |
+| 7 | Interface for function types | Describe a callable |
+| 8 | Index signatures | Dynamic keys — headers, error maps |
+| 9 | Generic interfaces | `ApiResponse<T>`, `PaginatedResponse<T>` |
+| 10 | Declaration merging | Two declarations of the same name are merged |
+| 11 | Nested interfaces | Interface property is another interface |
+| 12 | Interface vs type — full table | Side-by-side feature comparison |
 
 ---
 
 ### `9Type.ts` — Type Aliases (Deep Dive)
 
-| Section | Topic | Key idea |
+| # | Topic | Key idea |
 |---|---|---|
 | 1 | Primitive aliases | Give domain meaning to `string`, `number`, `boolean` |
 | 2 | Object shape | Same as interface for simple objects |
 | 3 | Union types | Only `type` can express `A \| B` |
-| 4 | Intersection types | `A & B` — object must satisfy both types |
-| 5 | Function types | Reusable function signatures: `Predicate<T>`, `Transform<T,R>` |
+| 4 | Intersection types | `A & B` — must satisfy both |
+| 5 | Function types | `Predicate<T>`, `Transform<T,R>` — reusable signatures |
 | 6 | Generic type aliases | `Maybe<T>`, `Pair<T,U>`, `ApiResponse<T>` |
-| 7 | Mapped types | `{ [K in keyof T]: ... }` — how `Partial`, `Readonly` are built |
+| 7 | Mapped types | `{ [K in keyof T]: ... }` — how `Partial`/`Readonly` are built |
 | 8 | Conditional types | `T extends U ? A : B` — type-level if/else |
-| 9 | Template literal types | `"margin-left"`, `"onClick"` — string types built from unions |
+| 9 | Template literal types | `"onClick"`, `"margin-left"` — string types from unions |
 | 10 | Recursive types | `TreeNode`, `JSONValue` — types that refer to themselves |
 | 11 | `ReturnType` & `Parameters` | Extract types from existing functions |
 | 12 | All utility types — reference | Full table of every built-in utility type |
 
 ---
 
-## How to Study Effectively
+## Phase 2 — React with TypeScript
 
-1. **Read first** — go through the file top to bottom, reading every comment.
-2. **Run it** — use `compile.sh` or `compile.bat` to see the actual output.
-3. **Break it** — change a type, pass a wrong argument, and read the TypeScript error. Errors teach faster than docs.
-4. **Re-implement** — close the file and rewrite the section from scratch. If you get stuck, that is the exact gap to fill.
-5. **Move to next file** — only after you can re-implement the current one without looking.
+> **Prerequisite:** Complete Phase 1 through at least `5Union.ts` before starting here.
+
+All React lessons live inside `2Basic-of-ReactTypscript/1myapp/src/`. Open the project, run `npm run dev`, and edit `App.tsx` to see your changes live in the browser.
+
+### Roadmap
+
+- [ ] JSX & functional components
+- [ ] Typing props with `interface`
+- [ ] `useState<T>` with typed state
+- [ ] `useEffect` — side effects and cleanup
+- [ ] `useRef<T>` — DOM refs and mutable values
+- [ ] Event handling with proper types (`React.MouseEvent`, `React.ChangeEvent`)
+- [ ] Conditional rendering
+- [ ] Rendering lists with `.map()` and `key`
+- [ ] `useContext` + Context API
+- [ ] Custom hooks
+- [ ] API calls with `fetch` / `axios` and typed responses
+- [ ] React Router
+- [ ] Form handling
 
 ---
 
-## Roadmap
+## How to Study Effectively
 
-### TypeScript Basics
-- [x] Data Types (`string`, `number`, `boolean`, `array`, `tuple`, `enum`, `any`, `unknown`)
-- [x] Functions (typed, optional, default, rest, generics, overloading, async)
-- [x] Objects (interface, type alias, optional/readonly, extend, intersection, utility types)
-- [x] Arrays (map, filter, reduce, forEach, find, sort, flat, chaining, destructuring)
-- [x] Union Types & Type Guards (literal unions, narrowing, discriminated unions, never, Extract/Exclude)
-- [x] Tuples (named, optional, rest, readonly, useState pattern, spread into functions)
-- [x] Enums (numeric, string, const, bitwise, keyof typeof, enum vs union)
-- [x] Interfaces (methods, extends, implements, generics, declaration merging, index sigs)
-- [x] Type Aliases (mapped types, conditional types, template literal types, recursive, utility types)
-- [ ] Generics in depth (generic interfaces, generic classes, constraints)
-- [ ] Modules & Namespaces
-
-### React with TypeScript
-- [ ] React Basics (JSX, props, state)
-- [ ] Functional Components with TypeScript
-- [ ] Hooks (`useState`, `useEffect`, `useRef`, `useContext`)
-- [ ] Custom Hooks
-- [ ] Event Handling with proper types
-- [ ] API Calls with `fetch` / `axios`
-- [ ] Context API
-- [ ] React Router
-- [ ] Form Handling
+1. **Read** — go through the file top to bottom, reading every comment.
+2. **Run** — use the compile script to see the actual output in your terminal.
+3. **Break it** — pass a wrong type, remove a required property, and read the TypeScript error. Errors teach faster than docs.
+4. **Re-implement** — close the file and rewrite each section from scratch. Getting stuck tells you exactly what to revisit.
+5. **Move on** — only move to the next file after you can re-implement the current one without looking.
 
 ---
 
 ## Prerequisites
 
-- **Node.js** v18+ — https://nodejs.org
-- **TypeScript** — `npm install -g typescript`
-- Any code editor (VS Code recommended — has built-in TypeScript support)
+| Tool | Version | Install |
+|---|---|---|
+| Node.js | v18+ | https://nodejs.org |
+| TypeScript | latest | `npm install -g typescript` |
+| Editor | any | VS Code recommended (has built-in TS support) |
