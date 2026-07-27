@@ -1,10 +1,9 @@
-import UseReducer from "../States/UseReducer";
-import "./App.css";
+import UseEffect from "../hooks/UseEffect";
 
 function App() {
   return (
     <>
-      <UseReducer />
+      <UseEffect />
     </>
   );
 }
